@@ -32,10 +32,5 @@
   } @empty {
     <li>No products found!</li>
   }
-  @if (selectedProduct) {
-    <p>
-      You selected:
-      <strong>{{ selectedProduct.title }}</strong>
-    </p>
-  }
+  <app-product-detail [product]="selectedProduct"></app-product-detail>
 </ul>

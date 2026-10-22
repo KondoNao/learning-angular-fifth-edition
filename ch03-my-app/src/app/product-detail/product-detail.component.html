@@ -1,1 +1,6 @@
-<p>product-detail works!</p>
+@if (product()) {
+  <p>
+    You selected:
+    <strong>{{ product()!.title }}</strong>
+  </p>
+}
