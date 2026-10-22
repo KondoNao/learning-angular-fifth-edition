@@ -20,13 +20,13 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'World';
-  title$ = new Observable(observer => {
+  title$ = new Observable<void>(observer => {
     setInterval(() => {
       observer.next();
     }, 2000);
-  });  
+  });
   settings = inject(APP_SETTINGS);
-  
+
   private setTitle = () => {
     const timestamp = new Date();
     this.title = `${this.settings.title} (${timestamp})`;
@@ -35,5 +35,5 @@ export class AppComponent {
   constructor() {
     this.title$.subscribe(this.setTitle);
   }
-  
+
 }
