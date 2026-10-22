@@ -3,6 +3,7 @@ import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductsService } from '../products.service';
 import { SortPipe } from '../sort.pipe';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-product-list',
@@ -11,13 +12,11 @@ import { SortPipe } from '../sort.pipe';
   styleUrl: './product-list.component.css',
 })
 export class ProductListComponent implements OnInit {
-  private readonly productService: ProductsService;
+  private readonly productService: ProductsService = inject(ProductsService);
   products: Product[] = [];
   selectedProduct: Product | undefined;
 
-  constructor(productService: ProductsService) {
-    this.productService = productService;
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.products = this.productService.getProducts();
