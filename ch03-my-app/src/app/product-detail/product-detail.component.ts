@@ -15,9 +15,9 @@ import { Product } from '../product';
 })
 export class ProductDetailComponent {
   product: InputSignal<Product | undefined> = input<Product>();
-  added: OutputEmitterRef<void> = output();
+  added: OutputEmitterRef<Product> = output<Product>();
 
   addToCart(): void {
-    this.added.emit();
+    this.added.emit(this.product()!);
   }
 }
