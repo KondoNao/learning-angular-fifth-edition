@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { Product } from '../product';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-favorites',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './favorites.component.html',
-  styleUrl: './favorites.component.css'
+  styleUrl: './favorites.component.css',
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit {
+  private readonly productsService: ProductsService = inject(ProductsService);
 
+  products: Product[] = [];
+
+  ngOnInit(): void {
+    this.products = this.productsService.getProducts();
+  }
 }
