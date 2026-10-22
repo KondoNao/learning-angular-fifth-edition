@@ -1,4 +1,11 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { APP_SETTINGS, appSettings } from './app.settings';
@@ -13,7 +20,7 @@ import { ProductListComponent } from './product-list/product-list.component';
   providers: [{ provide: APP_SETTINGS, useValue: appSettings }],
 })
 export class AppComponent {
-  title = 'World';
+  title: Signal<string> = signal('');
   title$ = new Observable<void>((observer) => {
     setInterval(() => {
       observer.next();
@@ -25,10 +32,12 @@ export class AppComponent {
 
   private setTitle = () => {
     this.currentDate.set(new Date());
-    this.title = `${this.settings.title} (${this.currentDate()})`;
   };
 
   constructor() {
     this.title$.subscribe(this.setTitle);
+    this.title = computed(() => {
+      return `${this.settings.title} (${this.currentDate()})`;
+    });
   }
 }
