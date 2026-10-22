@@ -1,5 +1,24 @@
 @if (products.length > 0) {
   <h1>Products ({{ products.length }})</h1>
-} @else {
-  <p>No products found!</p>
 }
+<ul class="pill-group">
+  @for (
+    product of products;
+    track product.id;
+    let count = $count;
+    let index = $index;
+    let first = $first;
+    let last = $last;
+    let even = $even;
+    let odd = $odd
+  ) {
+    <li class="pill">
+      {{ product.title }}
+      {{
+        `index/count: ${index}/${count}, first: ${first}, last: ${last}, even: ${even}, odd: ${odd}`
+      }}
+    </li>
+  } @empty {
+    <li>No products found!</li>
+  }
+</ul>
