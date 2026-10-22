@@ -1,48 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ProductsService } from '../products.service';
 import { SortPipe } from '../sort.pipe';
 
 @Component({
   selector: 'app-product-list',
   imports: [ProductDetailComponent, SortPipe],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrl: './product-list.component.css',
 })
-export class ProductListComponent {
-  products: Product[] = [
-    { 
-      id: 1,
-      title: 'Keyboard',
-      price: 100,
-      categories: {
-        1: 'Computing',
-        2: 'Peripherals'
-      }
-    },
-    {
-      id: 2,
-      title: 'Microphone',
-      price: 35,
-      categories: { 3: 'Multimedia' }
-    },
-    {
-      id: 3,
-      title: 'Web camera',
-      price: 79,
-      categories: {
-        1: 'Computing',
-        3: 'Multimedia'
-      }
-    },
-    {
-      id: 4,
-      title: 'Tablet',
-      price: 500,
-      categories: { 4: 'Entertainment' }
-    }
-  ];  
+export class ProductListComponent implements OnInit {
+  private readonly productService: ProductsService;
+  products: Product[] = [];
   selectedProduct: Product | undefined;
+
+  constructor() {
+    this.productService = new ProductsService();
+  }
+
+  ngOnInit(): void {
+    this.products = this.productService.getProducts();
+  }
 
   onAdded() {
     alert(`${this.selectedProduct?.title} added to the cart!`);
