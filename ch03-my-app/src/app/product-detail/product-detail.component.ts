@@ -1,4 +1,10 @@
-import { Component, input, InputSignal } from '@angular/core';
+import {
+  Component,
+  input,
+  InputSignal,
+  output,
+  OutputEmitterRef,
+} from '@angular/core';
 import { Product } from '../product';
 
 @Component({
@@ -9,4 +15,9 @@ import { Product } from '../product';
 })
 export class ProductDetailComponent {
   product: InputSignal<Product | undefined> = input<Product>();
+  added: OutputEmitterRef<void> = output();
+
+  addToCart(): void {
+    this.added.emit();
+  }
 }

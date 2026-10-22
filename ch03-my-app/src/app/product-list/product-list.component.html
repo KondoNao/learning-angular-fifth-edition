@@ -32,5 +32,8 @@
   } @empty {
     <li>No products found!</li>
   }
-  <app-product-detail [product]="selectedProduct"></app-product-detail>
+  <app-product-detail
+    [product]="selectedProduct"
+    (added)="onAdded()"
+  ></app-product-detail>
 </ul>
