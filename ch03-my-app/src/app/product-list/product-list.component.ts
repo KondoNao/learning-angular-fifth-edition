@@ -8,6 +8,7 @@ import { Product } from '../product';
   styleUrl: './product-list.component.css',
 })
 export class ProductListComponent {
+  selectedProduct: Product | undefined;
   products: Product[] = [
     { id: 1, title: 'Keyboard' },
     { id: 2, title: 'Microphone' },
