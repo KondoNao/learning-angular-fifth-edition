@@ -2,9 +2,11 @@ import {
   Component,
   input,
   InputSignal,
+  OnChanges,
   OnInit,
   output,
   OutputEmitterRef,
+  SimpleChanges,
 } from '@angular/core';
 import { Product } from '../product';
 
@@ -14,7 +16,7 @@ import { Product } from '../product';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnChanges {
   product: InputSignal<Product | undefined> = input<Product>();
   added: OutputEmitterRef<Product> = output<Product>();
 
@@ -28,5 +30,14 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(`ngOnInit(), Product: ${JSON.stringify(this.product())}`);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    const product = changes['product'];
+    const oldValue = product.previousValue;
+    const newValue = product.currentValue;
+    console.log('ngOnChanges(), changes: ', changes);
+    console.log('ngOnChanges(), product: ', product);
+    console.log('ngOnChanges(), oldValue: ', oldValue);
+    console.log('ngOnChanges(), newValue: ', newValue);
   }
 }
