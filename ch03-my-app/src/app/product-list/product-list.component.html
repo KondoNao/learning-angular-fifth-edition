@@ -13,6 +13,17 @@
     let odd = $odd
   ) {
     <li class="pill">
+      @switch (product.title) {
+        @case ("Keyboard") {
+          ⌨
+        }
+        @case ("Microphone") {
+          🎤
+        }
+        @default {
+          💳
+        }
+      }
       {{ product.title }}
       {{
         `index/count: ${index}/${count}, first: ${first}, last: ${last}, even: ${even}, odd: ${odd}`
