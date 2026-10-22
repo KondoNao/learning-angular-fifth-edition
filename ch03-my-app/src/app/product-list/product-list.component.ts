@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { AfterViewInit, viewChild } from '@angular/core';
 
 @Component({
   selector: 'app-product-list',
@@ -8,7 +9,7 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
 })
-export class ProductListComponent {
+export class ProductListComponent implements AfterViewInit {
   products: Product[] = [
     { id: 1, title: 'Keyboard' },
     { id: 2, title: 'Microphone' },
@@ -16,6 +17,12 @@ export class ProductListComponent {
     { id: 4, title: 'Tablet' },
   ];
   selectedProduct: Product | undefined = this.products[0];
+  productDetail = viewChild(ProductDetailComponent);
+
+  ngAfterViewInit(): void {
+    console.log(this.productDetail()!.product)
+  }
+
   onAdded(product: Product) {
     alert(`${product.title} added to the cart!`);
   }
