@@ -2,12 +2,18 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductsService } from '../products.service';
 import { SortPipe } from '../sort.pipe';
 
 @Component({
   selector: 'app-product-list',
-  imports: [ProductDetailComponent, SortPipe, FavoritesComponent],
+  imports: [
+    ProductDetailComponent,
+    SortPipe,
+    FavoritesComponent,
+    ProductViewComponent,
+  ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
   providers: [ProductsService],
